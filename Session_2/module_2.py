@@ -57,9 +57,9 @@ def task_7(words: [List[str]]) -> str:
             prefix = check
             while not word.startswith(prefix):
                 prefix = prefix[:-1]
-            if prefix not in result and len(prefix)>0:
+            if prefix not in result and len(prefix) > 0:
                 result.append(prefix)
-    if len(result) == 0: 
+    if len(result) == 0:
         return ""
     return max(result, key=len)
 
