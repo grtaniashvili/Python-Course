@@ -72,6 +72,3 @@ def task_8(haystack: str, needle: str) -> int:
         if haystack[i:i + len(needle)] == needle:
             return i
     return -1
-
-
-
