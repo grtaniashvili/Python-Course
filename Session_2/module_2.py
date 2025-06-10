@@ -1,7 +1,7 @@
-#from collections import defaultdict as dd
+# from collections import defaultdict as dd
 from itertools import product
 from typing import Any, Dict, List, Tuple
-#from pygments.lexer import words
+# from pygments.lexer import words
 
 
 def task_1(data_1: Dict[str, int], data_2: Dict[str, int]):
@@ -59,7 +59,8 @@ def task_7(words: [List[str]]) -> str:
                 prefix = prefix[:-1]
             if prefix not in result and len(prefix)>0:
                 result.append(prefix)
-    if len(result) == 0: return ""
+    if len(result) == 0: 
+        return ""
     return max(result, key=len)
 
 
