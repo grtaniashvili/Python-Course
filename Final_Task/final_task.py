@@ -57,7 +57,9 @@ def load_documents(filepath: str) -> Dict[int, str]:
 
 def build_inverted_index(documents: Dict[int, str]) -> InvertedIndex:
     inverted = defaultdict(set)
-    stop_words = {"the", "a", "an", "is", "of", "and", "in", "on", "it", "to", "by", "for"}
+    stop_words = {
+        "the", "a", "an", "is", "of", "and", "in", "on", "it", "to", "by", "for"
+    }
 
     for doc_id, text in documents.items():
         words = re.split(r"\W+", text)
@@ -98,19 +100,38 @@ def setup_subparsers(parser) -> None:
     subparser = parser.add_subparsers(dest="command")
 
     build_parser = subparser.add_parser("build", help="Build inverted index from dataset")
-    build_parser.add_argument("-d", "--dataset", required=True, help="Path to dataset file")
-    build_parser.add_argument("-o", "--output", default=DEFAULT_PATH_TO_STORE_INVERTED_INDEX,
-                              help="Path to save inverted index (default: %(default)s)")
+    build_parser.add_argument(
+        "-d", "--dataset",
+        required=True,
+        help="Path to dataset file"
+    )
+    build_parser.add_argument(
+        "-o", "--output",
+        default=DEFAULT_PATH_TO_STORE_INVERTED_INDEX,
+        help="Path to save inverted index (default: %(default)s)"
+    )
     build_parser.set_defaults(callback=callback_build)
 
     query_parser = subparser.add_parser("query", help="Query the inverted index")
-    query_parser.add_argument("--index", default=DEFAULT_PATH_TO_STORE_INVERTED_INDEX,
-                              help="Path to inverted index file (default: %(default)s)")
+    query_parser.add_argument(
+        "--index",
+        default=DEFAULT_PATH_TO_STORE_INVERTED_INDEX,
+        help="Path to inverted index file (default: %(default)s)"
+    )
     query_group = query_parser.add_mutually_exclusive_group(required=True)
-    query_group.add_argument("-q", "--query", dest="query", action="append", nargs="+",
-                             help="Queries as inline word lists")
-    query_group.add_argument("--query_from_file", dest="query", type=EncodedFileType("r", encoding="utf-8"),
-                             help="Path to query file")
+    query_group.add_argument(
+        "-q", "--query",
+        dest="query",
+        action="append",
+        nargs="+",
+        help="Queries as inline word lists"
+    )
+    query_group.add_argument(
+        "--query_from_file",
+        dest="query",
+        type=EncodedFileType("r", encoding="utf-8"),
+        help="Path to query file"
+    )
     query_parser.set_defaults(callback=callback_query)
 
 
